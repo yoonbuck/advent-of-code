@@ -2,20 +2,18 @@ import           Data.List.Split (splitOn)
 
 type Input = [String]
 
-type Output = String
-
 parse :: String -> Input
 parse = splitOn "\n\n"
 
-solveA :: Input -> Output
+solveA :: Input -> String
 solveA = const "Not yet implemented"
 
-solveB :: Input -> Output
+solveB :: Input -> String
 solveB = const "Not yet implemented"
 
 main :: IO ()
 main = do
   input <- getContents
   let parsed = parse input
-  print $ solveA parsed
-  print $ solveB parsed
+  putStrLn $ "Part A: " ++ show (solveA parsed)
+  putStrLn $ "Part B: " ++ show (solveB parsed)
