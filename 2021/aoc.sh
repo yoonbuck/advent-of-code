@@ -165,7 +165,7 @@ cmd_debug() {
     do_parse
     echo "module Debug where
 import $MODULE_NAME
-input = $PARSE_RESULT" > debug.hs
+input = $PARSE_RESULT :: Input" > debug.hs
     MODULE="Debug"
   fi
 
