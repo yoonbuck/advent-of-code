@@ -1,0 +1,6 @@
+{
+  "files.exclude": {
+    ".aocmodule": true,
+    ".vscode": true
+  }
+}
