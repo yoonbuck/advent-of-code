@@ -66,7 +66,8 @@ cmd_initialize_day() {
   fi
 
   # create the module
-  cp template.hs $MODULE_NAME.hs
+  echo "module $MODULE_NAME where" > $MODULE_NAME.hs
+  cat template.hs >> $MODULE_NAME.hs
   echo "Created and switched to module $MODULE_NAME."
 
   code $MODULE_NAME.hs input/*

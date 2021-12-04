@@ -1,12 +1,15 @@
+import Data.List.Split (splitOn)
+
+splitParagraphs :: String -> [String]
+splitParagraphs = splitOn "\n\n"
+
 -- type definitions
 
 -- parsed input type
 type Input = [Int]
 
---
-
 -- parse string input into input type
-parse :: String -> [Int]
+parse :: String -> Input
 parse = map read . lines
 
 --
