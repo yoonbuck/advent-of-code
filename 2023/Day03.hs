@@ -1,8 +1,10 @@
-module Day03 (solveA, solveB) where
+module Day03 (parse, Input, solveA, solveB) where
 
 import           Data.Char  (isNumber)
 import           Data.Maybe (mapMaybe)
 import           Lib
+
+type Input = [Line]
 
 data Line = Line { getSymbols     :: [Symbol]
                  , getPartNumbers :: [PartNumber]
@@ -34,6 +36,9 @@ parseLine line = go indexedLine [] [] Nothing
     continuePart (Just (val, s, _)) i v = Just (val * 10 + v, s, i)
     continuePart Nothing i v            = Just (v, i, i)
 
+parse :: String -> [Line]
+parse = map parseLine . lines
+
 componentTrio :: (Line -> [a]) -> [Line] -> [([a], [a], [a])]
 componentTrio f = tail . (\ss -> zip3 ([]:[]:ss) ([]:ss ++ [[]]) (ss ++ [[],[]])) . map f
 
@@ -45,11 +50,12 @@ filterToAdjacentSymbols (ns, (ss1, ss2, ss3)) = filter hasAdjacentSymbol ns
     hasAdjacentSymbol (PartNumber _ (s, e)) =
       any (\(Symbol _ p) -> p >= (s-1) && p <= (e+1)) ss
 
-solveA :: String -> Int
-solveA = lines >.> map parseLine >.>
-  (\ls -> zip (map getPartNumbers ls) (componentTrio getSymbols ls)) >.>
-  concatMap filterToAdjacentSymbols >.>
-  map getPartNumber >.> sum
+solveA :: Input -> Int
+solveA ls =
+  zip (map getPartNumbers ls) (componentTrio getSymbols ls)
+  |> concatMap filterToAdjacentSymbols
+  |> map getPartNumber
+  |> sum
 
 filterToGearRatios :: ([Symbol], ([PartNumber], [PartNumber], [PartNumber])) -> [Int]
 filterToGearRatios (ss, (ns1, ns2, ns3)) = mapMaybe get2AdjacentPartNumbers gears
@@ -67,7 +73,8 @@ filterToGearRatios (ss, (ns1, ns2, ns3)) = mapMaybe get2AdjacentPartNumbers gear
         isAdjacent :: PartNumber -> Bool
         isAdjacent (PartNumber _ (s, e)) = p >= (s-1) && p <= (e+1)
 
-solveB :: String -> Int
-solveB = lines >.> map parseLine >.>
-  (\ls -> zip (map getSymbols ls) (componentTrio getPartNumbers ls)) >.>
-  concatMap filterToGearRatios >.> sum
+solveB :: Input -> Int
+solveB ls =
+  zip (map getSymbols ls) (componentTrio getPartNumbers ls)
+  |> concatMap filterToGearRatios
+  |> sum

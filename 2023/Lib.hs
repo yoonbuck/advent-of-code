@@ -1,4 +1,4 @@
-module Lib (splitParagraphs, nats, natg, ix, (>.>)) where
+module Lib (splitParagraphs, nats, natg, ix, (>.>), (|>)) where
 
 import           Data.List.Split (splitOn)
 
@@ -19,3 +19,6 @@ ix = zip nats
 
 (>.>) :: (a -> b) -> (b -> c) -> a -> c
 (>.>) = flip (.)
+
+(|>) :: a -> (a -> b) -> b
+a |> f = f a

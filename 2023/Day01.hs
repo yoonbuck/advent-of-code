@@ -1,10 +1,15 @@
-module Day01 (solveA, solveB) where
+module Day01 (parse, Input, solveA, solveB) where
 
 import           Data.Char       (isNumber)
 import           Data.List.Extra (replace)
 
-solveA :: String -> Int
-solveA = sum . map solveLine . filter (/= "") . lines
+type Input = [String]
+
+parse :: String -> [String]
+parse = lines
+
+solveA :: Input -> Int
+solveA = sum . map solveLine
 
 solveLine :: [Char] -> Int
 solveLine line =
@@ -27,5 +32,5 @@ transformLine =
   replace "eight" "e8t" .
   replace "nine" "n9e"
 
-solveB :: String -> Int
-solveB = sum . map (solveLine . transformLine) . filter (/= "") . lines
+solveB :: Input -> Int
+solveB = sum . map (solveLine . transformLine)
