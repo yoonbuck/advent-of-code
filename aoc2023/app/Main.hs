@@ -1,9 +1,11 @@
 module Main (main) where
 
-import Day01
+import           Data.List.Extra (trim)
+import           Impl
 
 main :: IO ()
 main = do
   input <- getContents
-  putStrLn $ show (solveA input)
-  putStrLn $ show (solveB input)
+  let input' = trim input
+  print $ solveA input'
+  print $ solveB input'
