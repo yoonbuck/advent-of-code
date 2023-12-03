@@ -1,8 +1,5 @@
 import Data.List.Split (splitOn)
 
-splitParagraphs :: String -> [String]
-splitParagraphs = splitOn "\n\n"
-
 -- type definitions
 
 -- parsed input type

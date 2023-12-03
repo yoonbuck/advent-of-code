@@ -1,6 +1,6 @@
-module Lib (splitParagraphs, nats, natg, ix, (>.>), (|>)) where
+module Lib where
 
-import           Data.List.Split (splitOn)
+import Data.List.Split (splitOn)
 
 splitParagraphs :: String -> [String]
 splitParagraphs = splitOn "\n\n"
@@ -22,3 +22,6 @@ ix = zip nats
 
 (|>) :: a -> (a -> b) -> b
 a |> f = f a
+
+annotate :: (Functor f) => (t -> b) -> f t -> f (t, b)
+annotate fn = fmap (\a -> (a, fn a))
