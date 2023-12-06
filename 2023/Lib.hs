@@ -7,7 +7,7 @@ splitParagraphs = splitOn "\n\n"
 
 -- Natural numbers (incl. 0)
 nats :: [Int]
-nats = iterate succ 0
+nats = [0 ..]
 
 -- Infinite list generator from naturals
 natg :: (Int -> a) -> [a]
