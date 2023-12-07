@@ -112,9 +112,8 @@ scoreHand cards
 -- solve the problem (part A)
 solveA :: Input -> Int
 solveA =
-  map (\(hand, bet) -> (scoreHand hand, hand, bet))
-    >.> sortOn (\(strength, hand, _) -> (strength, hand))
-    >.> zipWith (\rank (_, _, bet) -> bet * rank) [1 ..]
+  sortOn (\(hand, bet) -> (scoreHand hand, hand))
+    >.> zipWith (\rank (_, bet) -> bet * rank) [1 ..]
     >.> sum
 
 scoreHandB :: [CardLabelB] -> Strength
@@ -128,9 +127,8 @@ scoreHandB cards =
 solveB :: Input -> Int
 solveB =
   map (first (map toCardB))
-    >.> map (\(hand, bet) -> (scoreHandB hand, hand, bet))
-    >.> sortOn (\(strength, hand, _) -> (strength, hand))
-    >.> zipWith (\rank (_, _, bet) -> bet * rank) [1 ..]
+    >.> sortOn (\(hand, bet) -> (scoreHandB hand, hand))
+    >.> zipWith (\rank (_, bet) -> bet * rank) [1 ..]
     >.> sum
 
 test :: String -> Strength
