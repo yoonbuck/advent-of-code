@@ -66,7 +66,7 @@ cmd_initialize_day() {
   fi
 
   # create the module
-  echo "module $MODULE_NAME (Input, parse, solveA, solveB) where" > $MODULE_NAME.hs
+  echo "module $MODULE_NAME where" > $MODULE_NAME.hs
   cat template.hs >> $MODULE_NAME.hs
   echo "Created and switched to module $MODULE_NAME."
 
